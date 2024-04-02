@@ -1,0 +1,51 @@
+City,State,Population,Area (mi©÷),# of CCTV Cameras,"# of cameras per 1,000 people",# of cameras per square mile,Crime Index,Limitations
+Atlanta,Georgia,"490,270",136,"60,864",124.14,448.4,63.8,
+Washington,District of Columbia,"631,693",61,"35,082",55.54,573.8,60.9,No data for public transport camera figures due to WMATA operating outside city limits
+Philadelphia,Pennsylvania,"1,527,886",134,"46,957",30.73,349.7,65.9,
+San Francisco,California,"715,717",47,"18,200",25.43,388.1,62.1,
+Denver,Colorado,"699,288",153,"14,043",20.08,91.6,46.9,
+Chicago,Illinois,"2,608,425",227,"48,283",18.51,212.4,65.9,
+Albuquerque,New Mexico,"558,523",187,"9,525",17.05,50.9,71.2,
+Detroit,Michigan,"621,193",139,"10,344",16.65,74.6,73.9,
+Las Vegas,Nevada,"653,843",142,"10,159",15.54,71.7,55.9,
+Memphis,Tennessee,"621,777",317,"8,417",13.54,26.5,76.3,Limited data for public transport camera figures
+Portland,Oregon,"619,286",133,"8,358",13.5,62.6,56.7,
+San Diego,California,"1,374,076",326,"17,990",13.09,55.2,40.9,
+Dallas,Texas,"1,259,404",340,"15,641",12.42,46,51.9,
+Milwaukee,Wisconsin,"555,640",96,"5,727",10.31,59.5,68.2,
+Baltimore,Maryland,"563,455",81,"5,961",10.58,73.6,74.4,
+Los Angeles,California,"3,769,485",469,"39,790",10.56,84.8,52.9,
+Minneapolis,Minnesota,"418,075",54,"4,024",9.63,74.5,55.8,
+New York City,New York,"7,888,121",300,"70,882",8.99,236,49.9,
+Boston,Massachusetts,"617,459",48,"5,453",8.83,112.8,40.6,
+Fresno,California,"549,242",115,"4,814",8.76,42,55.5,
+Sacramento,California,"528,306",98,"4,255",8.05,43.5,50.2,
+Kansas City,Missouri,"509,319",315,"3,993",7.84,12.7,57.9,
+Tulsa,Oklahoma,"408,956",197,"3,128",7.65,15.8,52.1,
+Charlotte,North Carolina,"885,663",307,"6,510",7.35,21.2,46.9,
+Louisville,Kentucky,"621,764",263,"4,066",6.54,15.4,57,
+Nashville,Tennessee,"658,525",476,"4,235",6.43,8.9,47.1,
+Austin,Texas,"966,292",320,"5,873",6.08,18.4,41,
+Columbus,Ohio,"907,865",219,"5,369",5.91,24.5,49.8,
+El Paso,Texas,"678,049",257,"3,991",5.89,15.5,31.2,
+Long Beach,California,"439,153",51,"2,558",5.82,50.5,59.5,
+Houston,Texas,"2,264,876",640,"11,714",5.17,18.3,63.2,
+Seattle,Washington,"725,487",84,"3,592",4.95,42.8,54.4,Public transport figures may extend further than the city/metro limits
+Indianapolis,Indiana,"871,449",362,"3,997",4.59,11.1,59.1,
+San Antonio,Texas,"1,479,493",485,"6,166",4.17,12.7,48.1,
+Miami,Florida,"435,919",36,"1,703",3.91,47.3,52.8,No data for public transport camera figures due to it being part of Miami Dade County's system
+Mesa,Arizona,"516,783",138,"1,807",3.5,13.1,44.3,Limited data for public transport camera figures
+Oakland,California,"422,994",56,"1,421",3.36,25.4,68.7,No data for public transport camera figures due to it being part of Alameda Contra Costa County's system
+Tampa,Florida,"393,264",114,"1,217",3.09,10.7,46,Public transport figures may extend further than the city/metro limits
+Virginia Beach,Virginia,"454,289",245,"1,350",2.97,5.5,42.9,No data for public transport camera figures due to HRT operating outside city limits
+Bakersfield,California,"416,175",150,"1,205",2.9,8,58.2,Limited data for public transport camera figures
+Jacksonville,Florida,"962,970",747,"2,761",2.87,3.7,56.3,Limited data for public transport camera figures
+San Jose,California,"930,862",178,"2,564",2.75,14.4,50.3,Limited data for public transport camera figures
+Oklahoma City,Oklahoma,"697,763",606,"1,859",2.66,3.1,49.3,
+Phoenix,Arizona,"1,651,344",518,"4,024",2.44,7.8,53.4,Public transport figures may extend further than the city/metro limits
+Fort Worth,Texas,"961,885",346,"2,183",2.27,6.3,42.8,Limited data for public transport camera figures
+Aurora,Colorado,"394,941",154,851,2.15,5.5,60.9,Limited data for public transport camera figures
+Omaha,Nebraska,"479,655",141,958,2,6.8,45.4,Limited data for public transport camera figures
+Tucson,Arizona,"546,019",238,890,1.63,3.7,54.1,Limited data for public transport camera figures
+Colorado Springs,Colorado,"491,530",195,778,1.58,4,41.4,Limited data for public transport camera figures
+Raleigh,North Carolina,"472,540",146,741,1.57,5.1,38.2,Limited data for public transport camera figures
