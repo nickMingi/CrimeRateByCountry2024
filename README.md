@@ -7,3 +7,4 @@ Data Analysis Project
 - https://www.numbeo.com/crime/rankings_by_country.jsp
 - https://upcomingsecurity.co.uk/security-guides/cctv-camera-guides/cctv-by-country/
 - https://www.comparitech.com/blog/vpn-privacy/us-surveillance-camera-statistics/
+- https://www.statista.com/statistics/750829/number-of-state-and-local-police-in-the-us/
