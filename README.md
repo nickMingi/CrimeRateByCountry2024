@@ -5,3 +5,4 @@ Data Analysis Project
 - https://insightcrime.org/
 - https://worldpopulationreview.com/country-rankings/crime-rate-by-country
 - https://www.numbeo.com/crime/rankings_by_country.jsp
+- https://upcomingsecurity.co.uk/security-guides/cctv-camera-guides/cctv-by-country/
