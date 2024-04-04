@@ -1,0 +1,7 @@
+INDEX VERSION 1.4+C:\Users\marin\PycharmProjects\CrimeRateByCountry2024\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+2726228166.index
+3464726501.index
+574579468.index
+4292919472.index
+1063708656.index
+163649272.index
