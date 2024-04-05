@@ -67,7 +67,11 @@ Data Analysis Project
 
 ## 참고 사이트 목록2
 프랑스
-- test
+- https://www.statista.com/statistics/1004596/homicide-rates-by-region-france/
+- https://knoema.com/atlas/France/Assault-rate
+- https://www.nationmaster.com/country-info/profiles/France/Crime
+- https://earthweb.com/who-has-the-most-cctv-in-the-world/
+- https://www.connexionfrance.com/article/French-news/SEE-2023-police-crime-figures-for-France
 
 ## 참고 사이트 목록3
 캐나다
