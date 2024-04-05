@@ -44,3 +44,5 @@ final_data
 final_df = pd.DataFrame(final_data,index=["살인","강간","절도","폭행"])
 print(final_df)
 
+print(final_df)
+
