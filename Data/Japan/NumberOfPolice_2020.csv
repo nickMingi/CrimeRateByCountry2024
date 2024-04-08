@@ -1,4 +1,4 @@
-area,number
+area,number,total population
 Aomori,2348
 Iwate,2153
 Miyagi,3766
@@ -51,3 +51,4 @@ Osaka,21474
 Hyogo,11953
 Nara,2481
 Wakayama,2183
+,,125100000
