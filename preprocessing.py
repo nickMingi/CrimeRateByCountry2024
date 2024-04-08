@@ -1,4 +1,6 @@
 import pandas as pd
+import warnings
+warnings.filterwarnings('ignore')
 
 ###################################################################################
 ########################## UNITED STATES ##########################################
@@ -221,9 +223,7 @@ japanfinal_df = pd.DataFrame(japanfinal_data, index=["살인", "강간", "절도
 
 japanPoliceCountData = pd.read_csv("./Data/Japan/NumberOfPolice_2020.csv")
 
-print(japanPoliceCountData)
-
-'''selected_columns = ["number","total population"]
+selected_columns = ["number","total population"]
 
 cnt = japanPoliceCountData[selected_columns]
 cnt["total population"].fillna(0, inplace=True)
@@ -231,7 +231,42 @@ cnt["total population"].fillna(0, inplace=True)
 japanpolice_cnt = pd.DataFrame({"Count": [cnt["number"].sum(),
                                     cnt["total population"].sum()]},
                           index=["총경찰관수", "총인구수"])
-print(japanpolice_cnt)'''
+
+selected_columns = ["total population"]
+cnt = japanPoliceCountData[selected_columns]
+
+cnt["total population"].fillna(0, inplace=True)
+
+cctv_1000 = 1
+
+cctvperson = (cctv_1000 / 1000) * cnt["total population"]
+
+japancctv_cnt = pd.DataFrame({"Count": [cctvperson.sum(),
+                                    cnt["total population"].sum()]},
+                          index=["총CCTV수", "총인구수"])
+
+japancctv_cnt
+
+data = {
+    "Offenses": ["Murder and nonnegligent manslaughter", "Rape", "Robbery", "Aggravated assault"],
+    "총 건수": [785, 1339, 68478, 45682],
+    "초범": [432, 744, 33100, 25307],
+    "재범": [353, 595, 35378, 20375]
+}
+
+japandf = pd.DataFrame(data)
+japandf["재범률"] = 0
+mean_rate = japandf["재범률"].mean()
+
+mean_rate_df = pd.DataFrame({"Count": [mean_rate]}, index=["재범률"])
+
+japan_df = pd.concat([japanfinal_df,japanpolice_cnt,japancctv_cnt,mean_rate_df])
+
+japan_df = japan_df.loc[~japan_df.index.duplicated(keep="last")]
+
+japan_df = japan_df.rename(columns={'Count': 'Japan'})
+
+print(japan_df)
 
 ###################################################################################
 ########################## FRANCE##################################################
@@ -263,34 +298,27 @@ df3 = df3.drop(columns = ['Theft offences with violence but without  weapons'])
 middle_df = pd.concat([df, df2, df3])
 francefinal_df = pd.DataFrame({ "Count" :{"살인" : middle_df.iloc[0][0], "강간" : middle_df.iloc[1][0] , "절도" : middle_df.iloc[2][0],"폭행": 0}})
 francefinal_df = pd.DataFrame(francefinal_df, index =['살인','강간','절도','폭행'])
-print(francefinal_df)
 
-'''francepopulation = pd.read_csv('./Data/France/france_population.CSV', encoding = 'cp949')
+francepopulation = pd.read_csv('./Data/France/france_population.CSV', encoding = 'cp949')
 francepopulation = francepopulation.drop([1,2,3])
-print(francepopulation)'''
-
 francepolice = pd.read_csv('./Data/France/프랑스 총 경찰수 (연도별).CSV', encoding = 'cp949')
 francepolice = francepolice.drop([0,1,2,3,4,5,6,7,8])
-print(francepolice)
-'''police_population = pd.concat([police,population])
+police_population = pd.concat([francepolice,francepopulation])
 police_population = police_population.drop(columns = 'Year')
 police_population = pd.DataFrame(police_population, index = ['총경찰관수','총인구수'])
 police_population = police_population.rename(columns = {'Population' : 'Count'})
 police_population = police_population.drop(columns = 'Number of police officers')
 police_population = pd.DataFrame({ 'Count' : { '총경찰관수' : 154547 , '총인구수':64531444}})
-print(police_population)'''
 
-'''cctv = pd.read_csv('./Data/France/amount of cctv.CSV' , encoding = 'cp949')
+cctv = pd.read_csv('./Data/France/Total CCTV.CSV' , encoding = 'cp949')
 cctv = cctv.drop(columns = '순위')
 cctv = cctv.drop([0,1,2,3,4,6,7,8,9,10,11,12,13,14,15,16,17,18])
-cctv_population = pd.concat([cctv,population])
+cctv_population = pd.concat([cctv,police_population])
 cctv_population = cctv_population.drop(columns = '나라')
-cctv_population = cctv_population.drop(columns = 'Year')
 cctv_population = pd.DataFrame(cctv_population , index = ['총CCTV수','총인구수'])
 cctv_population = cctv_population.drop(columns = 'CCTV 개수')
 cctv_population = cctv_population.rename(columns = {'Population' : 'Count'})
 cctv_population = pd.DataFrame({'Count' : {'총CCTV수': 1650000 ,'총인구수' :64531444}})
-print(cctv_population)'''
 
 francerecidivism = pd.read_csv('./Data/France/프랑스 재범율 (연도별).CSV', encoding = 'cp949')
 francerecidivism = francerecidivism.drop([0,1,2,3,4,5,6,7,8])
@@ -298,11 +326,18 @@ francerecidivism = francerecidivism.drop(columns = 'year ')
 francerecidivism = pd.DataFrame(francerecidivism, index = ['재범률'])
 francerecidivism = francerecidivism.rename(columns = {'recidivism rate' : 'Count'})
 francerecidivism = pd.DataFrame({'Count': {'재범률': 14.6}})
-print(francerecidivism)
+
+france_df = pd.concat([francefinal_df,police_population,cctv_population,francerecidivism])
+
+france_df = france_df.loc[~france_df.index.duplicated(keep="last")]
+
+france_df = france_df.rename(columns={'Count': 'France'})
+
+print(france_df)
 
 ###################################################################################
 ########################## FINAL ##################################################
 ###################################################################################
 
-#myFinal_df = pd.concat([final_df,koreafinal_df])
-#print(myFinal_df)
+myFinal_df = pd.concat([unitedStates_df,japan_df,france_df],axis=1)
+print(myFinal_df)
