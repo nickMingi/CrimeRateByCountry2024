@@ -86,7 +86,11 @@ Data Analysis Project
 
 ## 참고 사이트 목록5
 영국
-- test
+- https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates/timeseries/ukpop/pop
+- https://worldpopulationreview.com/country-rankings/crime-rate-by-country
+- https://www.crimesurvey.co.uk/en/index.html
+- https://www.data.gov.uk/search?q=violent+crime&filters%5Bpublisher%5D=&filters%5Btopic%5D=&filters%5Bformat%5D=&sort=best
+- https://www.statista.com/study/22087/crime-in-the-united-kingdom-dossier/
 ## 참고 사이트 목록6
 한국
 - test
