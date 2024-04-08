@@ -196,6 +196,86 @@ koreafinal_data = {"Count": [koreamurder_crime["Count"].sum(), korearape_crime["
 
 koreafinal_df = pd.DataFrame(koreafinal_data,index=["살인","강간","절도","폭행"])
 
+koreaPoliceCountData = pd.read_csv(f"./Data/SouthKorea/대한민국 10만명당 경찰인원 수 .CSV", encoding = "cp949")
+
+selected_columns = ["2022"]
+
+korearevisedPoliceData = koreaPoliceCountData[selected_columns]
+
+koreaPolicePopulation = pd.DataFrame({
+    "Count": [korearevisedPoliceData.iloc[0][0],
+                                    korearevisedPoliceData.iloc[1][0]]
+},index=["총경찰관수","총인구수"])
+
+koreaPolicePopulation = koreaPolicePopulation.replace(to_replace=r'[,]',value='',regex=True)
+koreaPolicePopulation['Count'] = koreaPolicePopulation.apply(lambda x: pd.to_numeric(x,errors='coerce')).sum(axis=1).round(1)
+
+'''koreacctvData = pd.read_csv("./Data/SouthKorea/cctvdata_.csv", encoding="utf-8")
+
+print(koreacctvData)
+
+selected_columns = ["관리기관명","카메라대수"]
+
+korearevisedcctvCount = cctvData[selected_columns]
+
+korearevisedcctvCount.head()
+
+korearevisedcctvCount_index = korearevisedcctvCount.set_index("관리기관명")
+korearevisedcctvCount_index.head()
+
+koreanoNull_cctv_Index = korearevisedcctvCount_index.fillna("0")
+koreanoNull_cctv_Index.head()
+
+noNull_cctv_Index["카메라대수"] = noNull_cctv_Index["카메라대수"].astype(str).str.replace(',', '')
+noNull_cctv_Index["Count"] = pd.to_numeric(noNull_cctv_Index["카메라대수"])
+noNull_cctv_Index.head()
+
+cctv_total_count = noNull_cctv_Index["Count"].sum().astype(int)
+cctv_total_count
+
+PopulationData = pd.read_csv("C:/ming/202403_202403_주민등록인구및세대현황_월간.CSV", encoding="EUC-KR")
+
+PopulationData.info()
+
+selected_columns = ["2024년03월_총인구수"]
+
+population_value = int(PopulationData[selected_columns].iloc[0, 0].replace(',', ''))
+
+pop = pd.DataFrame({"Count": [population_value]}, index=["총인구수"])
+
+pop["Count"] = pd.to_numeric(pop["Count"])
+
+pop
+
+cctv_total_count = noNull_cctv_Index["Count"].sum().astype(int)
+
+population_value = float(PopulationData[selected_columns].iloc[0, 0].replace(',', ''))
+
+count_sum = pd.DataFrame({
+    "Count": [cctv_total_count, population_value]
+}, index=["총CCTV수", "총인구수"])
+
+count_sum
+'''
+
+korea_cctv_count_sum = pd.DataFrame({
+    "Count": [0.0, korearevisedPoliceData.iloc[1][0]]
+}, index=["총CCTV수", "총인구수"])
+
+koreaRecidivism = pd.DataFrame({
+    "Count": [0.0]
+},index=["재범률"])
+
+korea_df = pd.concat([koreafinal_df,koreaPolicePopulation,korea_cctv_count_sum,koreaRecidivism])
+
+korea_df = korea_df.loc[~korea_df.index.duplicated(keep="last")]
+
+korea_df = korea_df.rename(columns={'Count': 'Korea'})
+
+korea_df.apply(pd.to_numeric)
+
+print(korea_df)
+
 ###################################################################################
 ########################## JAPN ###################################################
 ###################################################################################
@@ -339,5 +419,5 @@ print(france_df)
 ########################## FINAL ##################################################
 ###################################################################################
 
-myFinal_df = pd.concat([unitedStates_df,japan_df,france_df],axis=1)
+myFinal_df = pd.concat([korea_df,unitedStates_df,japan_df,france_df],axis=1)
 print(myFinal_df)
