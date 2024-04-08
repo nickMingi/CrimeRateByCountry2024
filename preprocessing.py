@@ -416,8 +416,116 @@ france_df = france_df.rename(columns={'Count': 'France'})
 print(france_df)
 
 ###################################################################################
+########################## UK ## ##################################################
+###################################################################################
+
+ukcrimeCountData = pd.read_csv('./Data/UK/영국 4대범죄 건수.CSV', encoding='utf-8')
+
+select_columns=['Offence category', 'Jan 2022 to Dec 2022']
+
+ukrevisedCrimeCount = ukcrimeCountData[select_columns]
+
+ukrevisedCrimeCount_index = ukrevisedCrimeCount.set_index('Offence category')
+
+uknoNull_Crime_Index = ukrevisedCrimeCount_index.fillna('0')
+
+uknoNull_Crime_Index['Jan 2022 to Dec 2022'] = [x.replace(',', '') for x in uknoNull_Crime_Index['Jan 2022 to Dec 2022']]
+
+uknoNull_Crime_Index['Count'] = pd.to_numeric(uknoNull_Crime_Index['Jan 2022 to Dec 2022'])
+
+ukrefined_index_crime = uknoNull_Crime_Index['Count']
+
+uktheft_crime = ukrefined_index_crime.loc[['TOTAL THEFT OFFENCES']]
+
+ukassault_crime = ukrefined_index_crime.loc[['Violence with injury', 'Violence without injury']]
+
+ukmurder_crime = ukrefined_index_crime.loc[['Homicide [note 3,4,5,6,7,8]']]
+
+ukrape_crime = ukrefined_index_crime.loc[['Rape']]
+
+ukfinal_data = {'Count': [ukmurder_crime.sum(), ukrape_crime.sum(), uktheft_crime.sum(), ukassault_crime.sum()]}
+
+ukfinal_df = pd.DataFrame(ukfinal_data, index=['살인', '강간', '절도', '폭행'])
+
+ukPoliceCountData = pd.read_csv('./Data/UK/영국 총 경찰 수 (연도별).CSV', encoding='utf-8')
+
+ukPopulationData = pd.read_csv('./Data/UK/영국 총 인구수.csv', encoding='utf-8')
+
+selected_columns = ['date', 'population']
+
+ukrevisedPopulationData = ukPopulationData[selected_columns]
+
+ukrevisedPopulationData = ukrevisedPopulationData.set_index('date')
+
+ukPoliceCountData = ukPoliceCountData.set_index('Year ')
+
+ukrevisedPopulationData['PopulationCount'] = ukrevisedPopulationData['population']
+
+uknumericPopulationData = ukrevisedPopulationData.drop(columns = ['population'])
+
+ukcombinedPolicePopulation = pd.merge(ukPoliceCountData, uknumericPopulationData, left_index=True, right_index=True, how='outer')
+
+ukfinalPolicePopulation = ukcombinedPolicePopulation.loc[2022]
+
+ukfinalPolicePopulationData = pd.DataFrame({'Count': [ukfinalPolicePopulation['Number of Police Officers'], ukfinalPolicePopulation['PopulationCount']]}, index=['총경찰관수', '총인구수'])
+
+ukcctvData = {'cctvCount': [689000, 83000, 58000, 46000, 43000, 39000, 38000, 36000, 33000]}
+ukrevisedcctvData = pd.DataFrame(ukcctvData)
+
+ukrevisedcctvData['Count'] = ukrevisedcctvData['cctvCount']
+ukcount = ukrevisedcctvData['Count'].sum()
+ukrevisedcctvData['Count'] = ukcount
+ukrevisedcctvData = ukrevisedcctvData.drop(columns=['cctvCount'])
+ukpopulationCount = ukfinalPolicePopulation['PopulationCount']
+ukfinalcctvData = pd.DataFrame({'Count': [ukrevisedcctvData['Count'][0], ukfinalPolicePopulation['PopulationCount']]}, index=['총CCTV수', '총인구수'])
+
+'''
+ukrecidivismData = pd.read_csv('./Data/UK/recidivism.csv', encoding='utf-8')
+print(ukrecidivismData)
+
+select_columns = ['Recidivism Rate']
+ukrevisedRecidivism = ukrecidivismData[select_columns]
+print(ukrevisedRecidivism)
+
+ukrevisedRecidivism['Recidivism Rate'] = [x.replace('%', '') for x in ukrevisedRecidivism['Recidivism Rate']]
+ukrevisedRecidivism['Rate'] = pd.to_numeric(ukrevisedRecidivism['Recidivism Rate'])
+print(ukrevisedRecidivism)
+
+ukfinalrecidivismData = pd.DataFrame({'Count' : [ukrevisedRecidivism['Rate'][12]]}, index = ['재범률'])
+print(ukfinalrecidivismData)
+'''
+ukfinalrecidivismData = pd.DataFrame({'Count' : [0]}, index = ['재범률'])
+
+uk_df = pd.concat([ukfinal_df,ukfinalPolicePopulationData,ukfinalcctvData,ukfinalrecidivismData])
+
+uk_df = uk_df.loc[~uk_df.index.duplicated(keep="last")]
+
+uk_df = uk_df.rename(columns={'Count': 'UK'})
+
+print(uk_df)
+
+###################################################################################
+########################## CANADA #################################################
+###################################################################################
+
+canadacrimeCountData = pd.read_csv(f"Data/Canada/캐나다_폭력_범죄.csv", encoding = "utf-8")
+Assaults_columns = ['년도', '건수']
+
+Assaults_data = canadacrimeCountData[Assaults_columns]
+
+Assaults_data = Assaults_data.drop(index = [0,1,2,3,4,5,6,7,8,9,10,11])
+Assaults_data = Assaults_data.drop(columns = ['년도'])
+Assaults_data['건수'] = Assaults_data['건수'].str.replace(',', '')
+Assaults_data['건수'] = Assaults_data['건수'].astype(float)
+int_Assaults_data = Assaults_data
+
+'''canadacrimeCountData = pd.read_csv(f"./Data/Canada/캐나다_살인_범죄.csv", encoding = 'utf-8')
+
+print(canadacrimeCountData)'''
+
+###################################################################################
 ########################## FINAL ##################################################
 ###################################################################################
 
-myFinal_df = pd.concat([korea_df,unitedStates_df,japan_df,france_df],axis=1)
+myFinal_df = pd.concat([korea_df,unitedStates_df,japan_df,france_df,uk_df],axis=1)
 print(myFinal_df)
