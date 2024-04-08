@@ -119,6 +119,12 @@ koreatheft_crime = koreanoNull_Crime_Index.loc[
 "(특수·인질·해상)강도(상습)",
 "특가법(강도)",
 "특가법(강도상해재범)",
+"절도(상습)",
+"특수절도",
+"특수절도(상습)",
+"야간주거침입절도",
+"야간주거침입절도(상습)",
+"특가법(절도)"
 ]
 ]
 
@@ -243,8 +249,19 @@ count_sum = pd.DataFrame({
     "Count": [cctv_total_count, population_value]
 }, index=["총CCTV수", "총인구수"])
 
+Korea_data = pd.read_csv('./Data/SouthKorea/한국_재소자_재범률.csv', encoding = 'utf-8')
+
+korearedf = pd.DataFrame(Korea_data)
+korearedf['출소자 재범률'] = korearedf['출소자 재범률'].astype(float)
+korearedf = korearedf.drop(columns = ['년도'])
+korearedf = korearedf.drop(index = [0,1])
+korearedf.rename(columns={'출소자 재범률': 'Count'}, inplace=True)
+new_index = ['재범률']
+korearedf.index = new_index
+print(korearedf)
+
 koreaRecidivism = pd.DataFrame({
-    "Count": [0.0]
+    "Count": [korearedf.iloc[0][0]]
 },index=["재범률"])
 
 korea_df = pd.concat([koreafinal_df,koreaPolicePopulation,count_sum,koreaRecidivism])
@@ -577,3 +594,27 @@ print(canada_df)
 
 myFinal_df = pd.concat([korea_df,unitedStates_df,japan_df,france_df,uk_df,canada_df],axis=1)
 print(myFinal_df)
+
+'''
+             Korea           US        Japan    France          UK    Canada
+살인           658.0      12440.0        853.0     736.0         632       887
+강간          5263.0          0.0       1655.0    30,780       67169     34200
+절도         17905.0     929490.0      44150.0    706200     1648404   1290215
+폭행        122426.0    1288170.0      52701.0         0     1370759  531243.0
+총경찰관수     131004.0     718217.0     273960.0    154547     164,000     70581
+총CCTV수    499886.0     536273.0     125100.0   1650000   1065000.0     43900
+총인구수    51293934.0  335942003.0  125100000.0  64531444  67596300.0  39276140
+재범률           23.8         37.1          0.0      14.6        24.9         0
+
+1. 경찰관 수는 인구비례 비슷하다.
+2. 미국은 총기 합법 국가라 압도적으로 범죄 건수가 많다.
+3. 전체적으로 CCTV수는 범죄율과 연관성이 없다.             ->   키 포인트
+4. 일본은 한국보다 인구수가 2배 많지만 4대 범죄 건수도 적고 CCTV 갯수도 적다.
+5. 미국의 살인율,절도율의 비율은 백인보다 흑인이 2.5배 많다.
+6. 미국의 범죄지수 TOP3 도시의 인종비율 64% 이상이 흑인이다.
+7. 일본은 Koban System이라고 해서 소규모 지역 경찰서의 역할로 범죄 억제 기능을 돕는다.
+
+-> 다문화, 외국인노동자 비율이 높은 지역일 수록 범죄 우발 지역일 가능성?
+-> 파출소가 없거나, 파출소와 거리가 멀수록 범죄 우발 지역일 가능성? 경찰청_경찰관서위치주소현황 (주소)
+
+'''
