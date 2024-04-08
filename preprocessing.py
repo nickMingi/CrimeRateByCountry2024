@@ -210,63 +210,44 @@ koreaPolicePopulation = pd.DataFrame({
 koreaPolicePopulation = koreaPolicePopulation.replace(to_replace=r'[,]',value='',regex=True)
 koreaPolicePopulation['Count'] = koreaPolicePopulation.apply(lambda x: pd.to_numeric(x,errors='coerce')).sum(axis=1).round(1)
 
-'''koreacctvData = pd.read_csv("./Data/SouthKorea/cctvdata_.csv", encoding="utf-8")
-
-print(koreacctvData)
+koreacctvData = pd.read_csv("./Data/SouthKorea/국내cctv_total.csv", encoding="utf-8")
 
 selected_columns = ["관리기관명","카메라대수"]
 
-korearevisedcctvCount = cctvData[selected_columns]
-
-korearevisedcctvCount.head()
+korearevisedcctvCount = koreacctvData[selected_columns]
 
 korearevisedcctvCount_index = korearevisedcctvCount.set_index("관리기관명")
-korearevisedcctvCount_index.head()
 
 koreanoNull_cctv_Index = korearevisedcctvCount_index.fillna("0")
-koreanoNull_cctv_Index.head()
 
-noNull_cctv_Index["카메라대수"] = noNull_cctv_Index["카메라대수"].astype(str).str.replace(',', '')
-noNull_cctv_Index["Count"] = pd.to_numeric(noNull_cctv_Index["카메라대수"])
-noNull_cctv_Index.head()
+koreanoNull_cctv_Index["카메라대수"] = koreanoNull_cctv_Index["카메라대수"].astype(str).str.replace(',', '')
+koreanoNull_cctv_Index["Count"] = pd.to_numeric(koreanoNull_cctv_Index["카메라대수"])
 
-cctv_total_count = noNull_cctv_Index["Count"].sum().astype(int)
-cctv_total_count
+cctv_total_count = koreanoNull_cctv_Index["Count"].sum().astype(int)
 
-PopulationData = pd.read_csv("C:/ming/202403_202403_주민등록인구및세대현황_월간.CSV", encoding="EUC-KR")
-
-PopulationData.info()
+koreaPopulationData = pd.read_csv("./Data/SouthKorea/202403_202403_주민등록인구및세대현황_월간.CSV", encoding="EUC-KR")
 
 selected_columns = ["2024년03월_총인구수"]
 
-population_value = int(PopulationData[selected_columns].iloc[0, 0].replace(',', ''))
+koreapopulation_value = int(koreaPopulationData[selected_columns].iloc[0, 0].replace(',', ''))
 
-pop = pd.DataFrame({"Count": [population_value]}, index=["총인구수"])
+pop = pd.DataFrame({"Count": [koreapopulation_value]}, index=["총인구수"])
 
 pop["Count"] = pd.to_numeric(pop["Count"])
 
-pop
+cctv_total_count = koreanoNull_cctv_Index["Count"].sum().astype(int)
 
-cctv_total_count = noNull_cctv_Index["Count"].sum().astype(int)
-
-population_value = float(PopulationData[selected_columns].iloc[0, 0].replace(',', ''))
+population_value = float(koreaPopulationData[selected_columns].iloc[0, 0].replace(',', ''))
 
 count_sum = pd.DataFrame({
     "Count": [cctv_total_count, population_value]
-}, index=["총CCTV수", "총인구수"])
-
-count_sum
-'''
-
-korea_cctv_count_sum = pd.DataFrame({
-    "Count": [0.0, korearevisedPoliceData.iloc[1][0]]
 }, index=["총CCTV수", "총인구수"])
 
 koreaRecidivism = pd.DataFrame({
     "Count": [0.0]
 },index=["재범률"])
 
-korea_df = pd.concat([koreafinal_df,koreaPolicePopulation,korea_cctv_count_sum,koreaRecidivism])
+korea_df = pd.concat([koreafinal_df,koreaPolicePopulation,count_sum,koreaRecidivism])
 
 korea_df = korea_df.loc[~korea_df.index.duplicated(keep="last")]
 
@@ -479,22 +460,15 @@ ukrevisedcctvData = ukrevisedcctvData.drop(columns=['cctvCount'])
 ukpopulationCount = ukfinalPolicePopulation['PopulationCount']
 ukfinalcctvData = pd.DataFrame({'Count': [ukrevisedcctvData['Count'][0], ukfinalPolicePopulation['PopulationCount']]}, index=['총CCTV수', '총인구수'])
 
-'''
-ukrecidivismData = pd.read_csv('./Data/UK/recidivism.csv', encoding='utf-8')
-print(ukrecidivismData)
+ukrecidivismData = pd.read_csv('./Data/UK/영국 재범율.CSV', encoding='utf-8')
 
 select_columns = ['Recidivism Rate']
 ukrevisedRecidivism = ukrecidivismData[select_columns]
-print(ukrevisedRecidivism)
 
 ukrevisedRecidivism['Recidivism Rate'] = [x.replace('%', '') for x in ukrevisedRecidivism['Recidivism Rate']]
 ukrevisedRecidivism['Rate'] = pd.to_numeric(ukrevisedRecidivism['Recidivism Rate'])
-print(ukrevisedRecidivism)
 
 ukfinalrecidivismData = pd.DataFrame({'Count' : [ukrevisedRecidivism['Rate'][12]]}, index = ['재범률'])
-print(ukfinalrecidivismData)
-'''
-ukfinalrecidivismData = pd.DataFrame({'Count' : [0]}, index = ['재범률'])
 
 uk_df = pd.concat([ukfinal_df,ukfinalPolicePopulationData,ukfinalcctvData,ukfinalrecidivismData])
 
@@ -519,13 +493,87 @@ Assaults_data['건수'] = Assaults_data['건수'].str.replace(',', '')
 Assaults_data['건수'] = Assaults_data['건수'].astype(float)
 int_Assaults_data = Assaults_data
 
-'''canadacrimeCountData = pd.read_csv(f"./Data/Canada/캐나다_살인_범죄.csv", encoding = 'utf-8')
+canadacrimeCountData = pd.read_csv(f"./Data/Canada/캐나다_살인_범죄.csv", encoding = 'utf-8')
 
-print(canadacrimeCountData)'''
+Murder_columns = ['년도', '건수']
+Murder_data = canadacrimeCountData[Murder_columns]
+Murder_data = Murder_data.drop(columns = ['년도'])
+Murder_data['건수'] = Murder_data['건수'].astype(int)
+int_Murder_data = Murder_data
+
+canadacrimeData = pd.read_csv(f"./Data/Canada/캐나다_재산_범죄.csv", encoding ='utf-8')
+
+theft_columns = ['년도','건수']
+theft_data = canadacrimeData[theft_columns]
+theft_data = theft_data.drop(index = [0,1,2,3,4,5,6,7,8,9,10,11])
+theft_data = theft_data.drop(columns = ['년도'])
+theft_data['건수'] = theft_data['건수'].str.replace(',', '')
+int_theft_data = theft_data
+
+canadacrimeData = pd.read_csv(f"./Data/Canada/캐나다_성폭행_범죄.csv", encoding ='utf-8')
+
+Sexual_assault_columns = ['년도', '건수']
+
+Sexual_assault_data = canadacrimeData[Sexual_assault_columns]
+Sexual_assault_data = Sexual_assault_data.drop(columns = ['년도'])
+Sexual_assault_data['건수'] = Sexual_assault_data['건수'].str.replace(',', '')
+Sexual_assault_data['건수'] = Sexual_assault_data['건수'].astype(int)
+int_Sexual_assault_data = Sexual_assault_data
+
+result = pd.concat([int_Murder_data ,int_Sexual_assault_data,
+                   int_theft_data, int_Assaults_data], ignore_index=True)
+
+new_index = ['살인', '강간', '절도', '폭행']
+result.index = new_index
+result = result.rename(columns = {'건수' : 'Count'})
+print(result)
+
+canadaPoliceCountData = pd.read_csv(f"./Data/Canada/캐나다_경찰관_수정본.csv",
+                             encoding = 'utf-8')
+canadadata = {'년도' : ['2022'],
+       '인구 수' : ['39,276,140']}
+canadadf = pd.DataFrame(canadadata)
+canadaPopulationData = canadadf
+
+canadaPopulationData['인구 수'] = canadaPopulationData['인구 수'].str.replace(',', '')
+canadaPopulationData['인구 수'] = canadaPopulationData['인구 수'].astype(int)
+
+canadaPoliceCountData = canadaPoliceCountData.drop(columns = ['2019','2020','2021','2023'])
+canadaPoliceCountData = canadaPoliceCountData.drop(index = [0,2,3,4,5])
+canadaPoliceCountData = canadaPoliceCountData.drop(columns = ['Statistics(통계)'])
+canadaPoliceCountData['2022'] = canadaPoliceCountData['2022'].str.replace(',', '')
+canadaPoliceCountData['2022'] = canadaPoliceCountData['2022'].astype(int)
+canadaPoliceCountData = canadaPoliceCountData.rename(columns = {'2022' : '인구 수'})
+Pol_Pop_data = pd.concat([canadaPoliceCountData, canadaPopulationData],ignore_index=True)
+Pol_Pop_data = Pol_Pop_data.drop(columns = ['년도'])
+Pol_Pop_data = Pol_Pop_data.rename(columns = {'인구 수' : 'Count'})
+new_index = ['총경찰관수', '총인구수']
+Pol_Pop_data.index = new_index
+print(Pol_Pop_data)
+
+selected_columns = ["인구 수"]
+canadaPopulationData1 = canadaPopulationData[selected_columns]
+canadafinal_data = canadaPopulationData1["인구 수"].tolist()
+cctv = 43900
+
+canadacnt = pd.DataFrame({"Count": [cctv, canadafinal_data[0]]}, index=["총CCTV수", "총인구수"])
+print(canadacnt)
+
+canadarecidivism_rate_data = 0
+canadarecidivism_df = pd.DataFrame({'Count' : [canadarecidivism_rate_data]}, index = ['재범률'])
+print(canadarecidivism_df)
+
+canada_df = pd.concat([result,Pol_Pop_data,canadacnt,canadarecidivism_df])
+
+canada_df = canada_df.loc[~canada_df.index.duplicated(keep="last")]
+
+canada_df = canada_df.rename(columns={'Count': 'Canada'})
+
+print(canada_df)
 
 ###################################################################################
 ########################## FINAL ##################################################
 ###################################################################################
 
-myFinal_df = pd.concat([korea_df,unitedStates_df,japan_df,france_df,uk_df],axis=1)
+myFinal_df = pd.concat([korea_df,unitedStates_df,japan_df,france_df,uk_df,canada_df],axis=1)
 print(myFinal_df)
