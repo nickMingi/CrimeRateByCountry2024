@@ -37,6 +37,7 @@
             margin: 50px 0;
             height: 600px;
             padding-top: 60px; /* 상단 메뉴의 높이에 따라 조정 */
+            border: 2px dotted cornflowerblue;
         }
     </style>
 </head>
@@ -66,5 +67,10 @@
 	        <p>여기는 섹션 4의 내용입니다.</p>
 	 	</div>
 	</div>
+	<script>
+		document.querySelector('#section1').addEventListener('click', funnction(){
+			document.querySelector('#section1').style.background('black')
+	})
+	</script>
 </body>
 </html>
