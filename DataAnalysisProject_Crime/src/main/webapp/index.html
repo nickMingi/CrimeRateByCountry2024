@@ -14,7 +14,7 @@
     		width: 100%;
     		background-color: #333;
     		overflow: hidden;
-    		z-index: 1000; /* ´Ù¸¥ ¿ä¼Òµé À§¿¡ Ç¥½ÃµÇµµ·Ï z-index ¼³Á¤ */
+    		z-index: 1000; /* ë‹¤ë¥¸ ìš”ì†Œë“¤ ìœ„ì— í‘œì‹œë˜ë„ë¡ z-index ì„¤ì • */
         }
         .navbar a {
             float: left;
@@ -31,46 +31,63 @@
         .container {
             max-width: 800px;
             margin: 0 auto;
-            padding-top: 60px; /* »ó´Ü ¸Ş´ºÀÇ ³ôÀÌ¿¡ µû¶ó Á¶Á¤ */
+            padding-top: 60px; /* ìƒë‹¨ ë©”ë‰´ì˜ ë†’ì´ì— ë”°ë¼ ì¡°ì • */
         }
         .section {
             margin: 50px 0;
             height: 600px;
-            padding-top: 60px; /* »ó´Ü ¸Ş´ºÀÇ ³ôÀÌ¿¡ µû¶ó Á¶Á¤ */
+            padding-top: 60px; /* ìƒë‹¨ ë©”ë‰´ì˜ ë†’ì´ì— ë”°ë¼ ì¡°ì • */
             border: 2px dotted cornflowerblue;
         }
     </style>
 </head>
 <body>
 	<div class="navbar">
-    <a href="#section1">¼½¼Ç 1</a>
-    <a href="#section2">¼½¼Ç 2</a>
-    <a href="#section3">¼½¼Ç 3</a>
-    <a href="#section4">¼½¼Ç 4</a>
+    <a href="#section1">ì„¹ì…˜ 1</a>
+    <a href="#section2">ì„¹ì…˜ 2</a>
+    <a href="#section3">ì„¹ì…˜ 3</a>
+    <a href="#section4">ì„¹ì…˜ 4</a>
+    <a href="#section5">ì„¹ì…˜ 5</a>
 	</div>
 	
 	<div class="container">
 	    <div id="section1" class="section">
-	        <h1>¼½¼Ç 1</h1>
-	        <p>¿©±â´Â ¼½¼Ç 1ÀÇ ³»¿ëÀÔ´Ï´Ù.</p>
+	        <h1>ì„¹ì…˜ 1</h1>
+	        <p>ì—¬ê¸°ëŠ” ì„¹ì…˜ 1ì˜ ë‚´ìš©ì…ë‹ˆë‹¤.test</p>
+	        <button onclick="runPreprocessing()">Run Preprocessing</button>
 	    </div>
 	    <div id="section2" class="section">
-	        <h1>¼½¼Ç 2</h1>
-	        <p>¿©±â´Â ¼½¼Ç 2ÀÇ ³»¿ëÀÔ´Ï´Ù.</p>
+	        <h1>ì„¹ì…˜ 2</h1>
+	        <p>ì—¬ê¸°ëŠ” ì„¹ì…˜ 2ì˜ ë‚´ìš©ì…ë‹ˆë‹¤.test2</p>
 	    </div>
 	    <div id="section3" class="section">
-	        <h1>¼½¼Ç 3</h1>
-	        <p>¿©±â´Â ¼½¼Ç 3ÀÇ ³»¿ëÀÔ´Ï´Ù.</p>
+	        <h1>ì„¹ì…˜ 3</h1>
+	        <p>ì—¬ê¸°ëŠ” ì„¹ì…˜ 3ì˜ ë‚´ìš©ì…ë‹ˆë‹¤.</p>
 	 	</div>
 	 	<div id="section4" class="section">
-	        <h1>¼½¼Ç 4</h1>
-	        <p>¿©±â´Â ¼½¼Ç 4ÀÇ ³»¿ëÀÔ´Ï´Ù.</p>
+	        <h1>ì„¹ì…˜ 4</h1>
+	        <p>ì—¬ê¸°ëŠ” ì„¹ì…˜ 4ì˜ ë‚´ìš©ì…ë‹ˆë‹¤.</p>
+	 	</div>
+	 	<div id="section5" class="section">
+	        <h1>ì„¹ì…˜ 5</h1>
+	        <p>ì—¬ê¸°ëŠ” ì„¹ì…˜ 5ì˜ ë‚´ìš©ì…ë‹ˆë‹¤.</p>
 	 	</div>
 	</div>
 	<script>
+    function runPreprocessing() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                alert("Preprocessing Complete!");
+            }
+        };
+        xhttp.open("GET", "PreprocessingServlet", true);
+        xhttp.send();
+    }
+
 		document.querySelector('#section1').addEventListener('click', funnction(){
 			document.querySelector('#section1').style.background('black')
-	})
+	  })
 	</script>
 </body>
 </html>
