@@ -75,7 +75,12 @@ Data Analysis Project
 
 ## 참고 사이트 목록3
 캐나다
-- test
+- https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=3510007601
+- https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1710000901
+- https://www.statista.com/statistics/525290/canada-number-of-property-crimes/
+- https://www.statista.com/statistics/525273/canada-number-of-violent-crimes/
+- https://www.statista.com/statistics/526539/canada-us-homicide-rate/
+- https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=3510005001
 
 ## 참고 사이트 목록4
 일본
